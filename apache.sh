@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Установка из репозитория
-sudo apt install apache2
+apt install apache2
 
 # Создаем 3 директории, в которых будут лежать веб-страницы для каждого сайта
 mkdir /var/www/{8080..8082}
