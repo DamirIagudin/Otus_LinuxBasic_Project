@@ -10,10 +10,10 @@ rsync -abvuP node_exporter.service prometheus.service /etc/systemd/system
 
 
 # создаем директорию в которую будем качать архивы и их потом разархивировать
-mkdir /home/damir/prometheus
+mkdir $HOME/prometheus
 
 # скачиваем архивы в созданную директорию
-cd /home/damir/prometheus
+cd $HOME/prometheus
 curl -LO https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.45.0.linux-amd64.tar.gz
 curl -LO https://github.com/prometheus/node_exporter/releases/download/v1.6.1/node_exporter-1.6.1.linux-amd64.tar.gz
 
@@ -27,13 +27,13 @@ useradd --no-create-home --shell /usr/sbin/nologin node_exporter
 
 
 # копирование в /etc/prometheus
-cd /home/damir/prometheus/prometheus-2.45.0.linux-amd64
+cd $HOME/prometheus/prometheus-2.45.0.linux-amd64
 rsync --chown=prometheus:prometheus -arvP consoles console_libraries /etc/prometheus/
 
 
 # копирование в /usr/local/bin/
 rsync --chown=prometheus:prometheus -arvuP prometheus promtool /usr/local/bin/
-cd /home/damir/prometheus/node_exporter-1.6.1.linux-amd64
+cd $HOME/prometheus/node_exporter-1.6.1.linux-amd64
 rsync --chown=node_exporter:node_exporter -arvuP node_exporter /usr/local/bin/
 
 # gередаем права пользователя prometheus
