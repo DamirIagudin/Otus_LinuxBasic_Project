@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Установка из репозитория
+apt install nginx
+
 # В директорию /etc/nginx/sites-available/ копирует готовый файл конфигурации balance-server.conf.
 cp balance-server.conf /etc/nginx/sites-available/
 
