@@ -4,7 +4,7 @@
 apt install mysql-server
 
 #Меняем настройки в конфиге, должен слушать не только localhost, но и другие адреса
-sudo sed -i '/mysqlx-bind-address/s/127.0.0.1/0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
+sudo sed -i '/bind-address/s/127.0.0.1/0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 #Меняем сервер ID, чтобы отличались у мастера и реплики.
 sudo sed -i '/# server-id/c server-id  = 2' /etc/mysql/mysql.conf.d/mysqld.cnf
 
