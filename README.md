@@ -18,7 +18,7 @@ cd Otus_LinuxBasic_Project
 	sudo bash nginx.sh
 - проверка открытых сокетов
 	sudo ss -ntlp
-- проверка работы вебсервер из браузера на адрес 192.168.178.41
+- проверка работы вебсервер из браузера на адрес 192.168.178.11
 
 4. Настройка системы мониторинга
 - установка и конфигурация Prometheus и node_exporter
@@ -29,7 +29,7 @@ cd Otus_LinuxBasic_Project
 	sudo ss -ntlp	
 - создание в браузере дашборда для мониторинга;
 	настройка data_sources:
-	http://192.168.178.41:9090
+	http://192.168.178.11:9090
 	импорт дашборда 1860
 	
 	
@@ -37,7 +37,7 @@ cd Otus_LinuxBasic_Project
 
 5.1 Установка, конфигурация MySQL на Source (linux-spec1).
 - установка и конфигурация MySQL
-	sudo bash mysql_replica.sh 
+	sudo bash mysql_source.sh  
 - создаем пользователя для репликации
 	CREATE USER repl@'%' IDENTIFIED WITH 'caching_sha2_password' BY 'oTUSlave#2020'; 
 - предоставляем новому пользователю права
@@ -47,11 +47,11 @@ cd Otus_LinuxBasic_Project
 	
 5.2 Установка, конфигурация MySQL на Replica (linux-spec2).
 - установка и конфигурация MySQL
-	sudo bash mysql_source.sh 
+	sudo bash mysql_replica.sh 
 - на всякий случай делаем стоп репликации
 	STOP SLAVE;
 - вводим длинную сакральную команду)), используем данные из команды show master status на source:
-	CHANGE REPLICATION SOURCE TO SOURCE_HOST='192.168.178.41', SOURCE_USER='repl', SOURCE_PASSWORD='oTUSlave#2020', SOURCE_LOG_FILE='binlog.000003', SOURCE_LOG_POS= 885, GET_SOURCE_PUBLIC_KEY = 1;
+	CHANGE REPLICATION SOURCE TO SOURCE_HOST='192.168.178.11', SOURCE_USER='repl', SOURCE_PASSWORD='oTUSlave#2020', SOURCE_LOG_FILE='binlog.000003', SOURCE_LOG_POS= 885, GET_SOURCE_PUBLIC_KEY = 1;
 - запускаем репликацию
 	START REPLICA; 
 -проверяем статус подключения и репликации
