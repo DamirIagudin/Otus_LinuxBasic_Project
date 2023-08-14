@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 
-  Vagrant.configure("2") do |config|
+Vagrant.configure("2") do |config|
 	(1..2).each do |i|
 		config.vm.define "linux-spec-#{i}" do |spec|
 			spec.vm.box = "ubuntu/jammy64"
