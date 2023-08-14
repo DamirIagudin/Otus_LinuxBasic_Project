@@ -19,7 +19,7 @@
 -- Position to start replication or point-in-time recovery from
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='binlog.000006', MASTER_LOG_POS=6120;
+-- CHANGE MASTER TO MASTER_LOG_FILE='binlog.000005', MASTER_LOG_POS=157;
 
 --
 -- Table structure for table `replica_tabl`
@@ -41,7 +41,7 @@ CREATE TABLE `replica_tabl` (
 
 LOCK TABLES `replica_tabl` WRITE;
 /*!40000 ALTER TABLE `replica_tabl` DISABLE KEYS */;
-INSERT INTO `replica_tabl` VALUES (1,'Elena',21),(2,'Petr',28),(3,'Bohdan',22),(4,'Sergey',24);
+INSERT INTO `replica_tabl` VALUES (1,'Elena',25),(2,'Petr',28),(3,'Bohdan',22),(4,'Sergey',24),(5,'Yuri',24);
 /*!40000 ALTER TABLE `replica_tabl` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-06 11:44:55
+-- Dump completed on 2023-08-14 22:36:01

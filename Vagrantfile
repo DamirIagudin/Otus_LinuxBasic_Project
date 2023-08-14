@@ -9,7 +9,7 @@
 			spec.vm.box_version = "20230802.0.0"
 			spec.vm.box_download_insecure=true
 			spec.vm.box_check_update = false
-			spec.vm.network "public_network", ip: "192.168.178.4#{i}"
+			spec.vm.network "public_network", ip: "192.168.178.1#{i}"
 			spec.vm.hostname = "linux-spec-#{i}"
 			spec.vm.provider "virtualbox" do |vb|
 				vb.memory = "4096"
