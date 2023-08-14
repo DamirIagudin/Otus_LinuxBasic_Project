@@ -13,20 +13,20 @@ cd Otus_LinuxBasic_Project
 
 3. Настройка вебсервера с балансировкой нагрузки
 - установка и конфигурация Apache 
-	sudo bash apache.sh 
+sudo bash apache.sh 
 - установка и конфигурация Nginx
-	sudo bash nginx.sh
+sudo bash nginx.sh
 - проверка открытых сокетов
-	sudo ss -ntlp
+sudo ss -ntlp
 - проверка работы вебсервер из браузера на адрес 192.168.178.11
 
 4. Настройка системы мониторинга
 - установка и конфигурация Prometheus и node_exporter
-	sudo bash monitoring.sh
+sudo bash monitoring.sh
 - установка и конфигурация Grafana
-	sudo bash grafana.sh 
+sudo bash grafana.sh 
 - проверка открытых сокетов
-	sudo ss -ntlp	
+sudo ss -ntlp	
 - создание в браузере дашборда для мониторинга;
 	настройка data_sources:
 	http://192.168.178.11:9090
@@ -37,35 +37,35 @@ cd Otus_LinuxBasic_Project
 
 5.1 Установка, конфигурация MySQL на Source (linux-spec1).
 - установка и конфигурация MySQL
-	sudo bash mysql_source.sh  
+sudo bash mysql_source.sh  
 - создаем пользователя для репликации
-	CREATE USER repl@'%' IDENTIFIED WITH 'caching_sha2_password' BY 'oTUSlave#2020'; 
+CREATE USER repl@'%' IDENTIFIED WITH 'caching_sha2_password' BY 'oTUSlave#2020'; 
 - предоставляем новому пользователю права
-	GRANT REPLICATION SLAVE ON *.* TO repl@'%';	
+GRANT REPLICATION SLAVE ON *.* TO repl@'%';	
 - для настройки репликации на linux-spec2 смотрим текущий binlog MASTER_LOG_FILE='binlog.000008'
-	show master status;
+show master status;
 	
 5.2 Установка, конфигурация MySQL на Replica (linux-spec2).
 - установка и конфигурация MySQL
-	sudo bash mysql_replica.sh 
+sudo bash mysql_replica.sh 
 - на всякий случай делаем стоп репликации
-	STOP SLAVE;
+STOP SLAVE;
 - вводим длинную сакральную команду)), используем данные из команды show master status на source:
-	CHANGE REPLICATION SOURCE TO SOURCE_HOST='192.168.178.11', SOURCE_USER='repl', SOURCE_PASSWORD='oTUSlave#2020', SOURCE_LOG_FILE='binlog.000003', SOURCE_LOG_POS= 885, GET_SOURCE_PUBLIC_KEY = 1;
+CHANGE REPLICATION SOURCE TO SOURCE_HOST='192.168.178.11', SOURCE_USER='repl', SOURCE_PASSWORD='oTUSlave#2020', SOURCE_LOG_FILE='binlog.000003', SOURCE_LOG_POS= 885, GET_SOURCE_PUBLIC_KEY = 1;
 - запускаем репликацию
-	START REPLICA; 
--проверяем статус подключения и репликации
-	show replica status\G
+START REPLICA; 
+- проверяем статус подключения и репликации
+show replica status\G
 	
 5.3 Создание БД, восстановление БД из ранее созданного бэкапа.
 - SOURCE. Создаем БД otus_db на source:
-	create database otus_db;
+create database otus_db;
 - REPLICA. Проверяем что БД otus_db скопировалась
-	show databases;
+show databases;
 - REPLICA. Убедимся, что БД otus_db пустая
-	SELECT * from replica_tabl;
+SELECT * from replica_tabl;
 - SOURCE. Восстанавливаем БД из ранее созданного бэкапа.
-	sudo mysql -u root -p otus_db < dump2.sql
+sudo mysql -u root -p otus_db < dump2.sql
 	
 5.4 Настройка бэкапа БД otus_db на REPLICA (linux-spec2).
 - открываем Crontab
