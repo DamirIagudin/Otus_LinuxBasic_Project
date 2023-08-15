@@ -63,13 +63,14 @@ create database otus_db;
 - REPLICA. Проверяем что БД otus_db скопировалась
 show databases;
 - REPLICA. Убедимся, что БД otus_db пустая
+show tables;
 SELECT * from replica_tabl;
 - SOURCE. Восстанавливаем БД из ранее созданного бэкапа.
 sudo mysql -u root -p otus_db < dump2.sql
 	
 5.4 Настройка бэкапа БД otus_db на REPLICA (linux-spec2).
 - открываем Crontab
-	crontab -e
+crontab -e
 - добавляем в конце строку, в которой указывается, что делаем бэкап каждую минуту (для демонстрации), используем команду mysqldump с записью имени 	binlog и позиции 
 
 * * * * * sudo mysqldump -uroot -p --source-data=2 otus_db replica_tabl > /home/vagrant/Otus_LinuxBasic_Project/dump_cron.sql
