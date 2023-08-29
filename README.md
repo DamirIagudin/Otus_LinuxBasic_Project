@@ -5,6 +5,9 @@
 
 Порядок действий
 
+0. После подключения к виртуалке первым делом  обновляем индексы и списки пакетов 
+sudo apt update
+
 1. Находясь в домашней директории клонируем репозиторий с GitHub:
 git clone https://github.com/DamirIagudin/Otus_LinuxBasic_Project.git
 
